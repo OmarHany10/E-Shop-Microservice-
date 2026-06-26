@@ -1,4 +1,5 @@
 using Carter;
+using Marten;
 
 namespace Catalog
 {
@@ -13,7 +14,11 @@ namespace Catalog
             {
                 con.RegisterServicesFromAssemblies(typeof(Program).Assembly);
             });
-            
+
+            builder.Services.AddMarten(opt =>
+            {
+                opt.Connection(builder.Configuration.GetConnectionString("cs"));
+            }).UseLightweightSessions();          
             var app = builder.Build();
 
             app.MapCarter();

@@ -5,4 +5,7 @@
   <Folder Name="/Services/">
     <Project Path="Services/Catalog/Catalog.csproj" />
   </Folder>
+  <Project Path="docker-compose.dcproj">
+    <Build />
+  </Project>
 </Solution>
