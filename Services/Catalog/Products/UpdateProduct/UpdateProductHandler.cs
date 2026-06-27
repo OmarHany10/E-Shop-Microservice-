@@ -16,7 +16,7 @@ namespace Catalog.Products.UpdateProduct
             var product = await documentSession.LoadAsync<Product>(request.Id);
 
             if (product is null)
-                throw new ProductNotFoundException();
+                throw new ProductNotFoundException(request.Id);
 
             product.Categeroy = request.Categeroy;
             product.ImageFile = request.ImageFile;

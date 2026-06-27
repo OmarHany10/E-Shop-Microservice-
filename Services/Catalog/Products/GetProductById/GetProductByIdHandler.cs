@@ -14,7 +14,7 @@ namespace Catalog.Products.GetProductById
             var result = await documentSession.LoadAsync<Product>(request.id, cancellationToken);
 
             if (result == null)
-                throw new ProductNotFoundException();
+                throw new ProductNotFoundException(request.id);
 
             return new GetProductByIdResult(result);
         }
