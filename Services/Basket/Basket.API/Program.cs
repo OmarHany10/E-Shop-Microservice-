@@ -1,20 +1,16 @@
+using Basket.API.Data;
 using BuildingBlocks.Behaviors;
 using BuildingBlocks.Exceptions;
 using Carter;
-using Catalog.Data;
-using FluentValidation;
-using HealthChecks.UI.Client;
 using Marten;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
-namespace Catalog
+namespace Basket.API
 {
     public class Program
     {
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
             var assembly = typeof(Program).Assembly;
 
             builder.Services.AddCarter();
@@ -24,28 +20,20 @@ namespace Catalog
                 con.AddOpenBehavior(typeof(ValidationBehavior<,>));
                 con.AddOpenBehavior(typeof(LoggingBehavior<,>));
             });
-            builder.Services.AddValidatorsFromAssembly(assembly);
+
+            builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
             builder.Services.AddMarten(opt =>
             {
                 opt.Connection(builder.Configuration.GetConnectionString("cs"));
             }).UseLightweightSessions();
 
-            builder.Services.AddExceptionHandler<CustomExceptionHandler>();
-
-            if (builder.Environment.IsDevelopment())
-                builder.Services.InitializeMartenWith<CatalogInitialData>();
-
-            builder.Services.AddHealthChecks().AddNpgSql(builder.Configuration.GetConnectionString("cs"));
+            builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 
             var app = builder.Build();
 
             app.MapCarter();
             app.UseExceptionHandler(opt => { });
-            app.UseHealthChecks("/health", new HealthCheckOptions
-            {
-                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-            });
 
             app.Run();
         }

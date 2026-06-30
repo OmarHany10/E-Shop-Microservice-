@@ -5,15 +5,16 @@ using MediatR;
 
 namespace Catalog.Products.GetProducts
 {
+    public record GetProductRequest(int? PageNumber = 1, int? PageSize = 10);
     public record GetProductResponse(IEnumerable<Product> Products);
     public class GetProductsEndPoint : ICarterModule
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapGet("/Products", async(ISender sender) => 
+            app.MapGet("/Products", async([AsParameters] GetProductRequest request, ISender sender) => 
             {
-
-                var result = await sender.Send(new GetProductQuery());
+                var query = request.Adapt<GetProductQuery>();
+                var result = await sender.Send(new GetProductQuery(request.PageNumber, request.PageSize));
 
                 var response = result.Adapt<GetProductResponse>();
 

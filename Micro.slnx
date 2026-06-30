@@ -5,6 +5,9 @@
   <Folder Name="/Services/">
     <Project Path="Services/Catalog/Catalog.csproj" />
   </Folder>
+  <Folder Name="/Services/Basket/">
+    <Project Path="Services/Basket/Basket.API/Basket.API.csproj" Id="9d824024-0f71-403d-9eb7-85ed9848c774" />
+  </Folder>
   <Project Path="docker-compose.dcproj">
     <Build />
   </Project>
