@@ -2,7 +2,9 @@ using Basket.API.Data;
 using BuildingBlocks.Behaviors;
 using BuildingBlocks.Exceptions;
 using Carter;
+using HealthChecks.UI.Client;
 using Marten;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 namespace Basket.API
 {
@@ -29,11 +31,27 @@ namespace Basket.API
             }).UseLightweightSessions();
 
             builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+            builder.Services.Decorate<IBasketRepository, CashedBasketRepository>();
+
+            builder.Services.AddStackExchangeRedisCache(opt =>
+            {
+                opt.Configuration = builder.Configuration.GetConnectionString("cashe");
+                opt.InstanceName = "Basket";
+            });
+
+            builder.Services.AddHealthChecks()
+                .AddNpgSql(builder.Configuration.GetConnectionString("cs"))
+                .AddRedis(builder.Configuration.GetConnectionString("cashe"));
 
             var app = builder.Build();
 
             app.MapCarter();
+
             app.UseExceptionHandler(opt => { });
+            app.UseHealthChecks("/health", new HealthCheckOptions()
+            {
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
 
             app.Run();
         }
