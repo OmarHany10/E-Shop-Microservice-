@@ -10,9 +10,9 @@ namespace Ordering.Domain.ValueObjects
         private const int DefaultLength = 5;
         public string Value { get; }
 
-        private OrderName(string name)
+        private OrderName(string value)
         {
-            Value = name;
+            Value = value;
         }
 
         public static OrderName Of(string name)

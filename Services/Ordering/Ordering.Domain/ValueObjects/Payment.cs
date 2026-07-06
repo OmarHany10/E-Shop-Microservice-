@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ordering.Domain.ValueObjects
 {
-    public class Payment
+    public record Payment
     {
         public string CardName { get; }
         public string CardNumber { get; }
@@ -26,5 +26,14 @@ namespace Ordering.Domain.ValueObjects
             PaymentMethod = paymentMethod;
         }
 
+        public static Payment Of(string cardName, string cardNumber, string expiration, string cvv, int paymentMethod)
+        {
+            ArgumentException.ThrowIfNullOrWhiteSpace(cardName);
+            ArgumentException.ThrowIfNullOrWhiteSpace(cardNumber);
+            ArgumentException.ThrowIfNullOrWhiteSpace(expiration);
+            ArgumentException.ThrowIfNullOrWhiteSpace(cvv);
+
+            return new Payment(cardName, cardNumber, expiration, cvv, paymentMethod);
+        }
     }
 }

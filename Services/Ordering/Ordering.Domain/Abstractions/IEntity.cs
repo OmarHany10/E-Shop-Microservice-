@@ -10,9 +10,9 @@ namespace Ordering.Domain.Abstractions
     }
     public interface IEntity
     {
-        public string CreateidBy { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public string ModifiedBy { get; set; }
-        public DateTime ModifiedAt { get; set; }
+        public string? CreateidBy { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public string? ModifiedBy { get; set; }
+        public DateTime? ModifiedAt { get; set; }
     }
 }

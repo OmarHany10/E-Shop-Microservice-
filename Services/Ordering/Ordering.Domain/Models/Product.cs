@@ -10,5 +10,13 @@ namespace Ordering.Domain.Models
     {
         public string Name { get; private set; }
         public decimal Price { get; private set; }
+
+        public static Product Create(ProductId productId, string name, decimal price)
+        {
+            ArgumentNullException.ThrowIfNull(name);
+            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(price);
+
+            return new Product() { Id = productId, Name = name, Price = price };
+        }
     }
 }
