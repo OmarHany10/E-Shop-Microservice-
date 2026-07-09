@@ -16,7 +16,7 @@ namespace Ordering.Application.Order.Quiries.GetOrders
         {
             var orders = await context.Orders.AsNoTracking()
                 .Include(o => o.OrderItems)
-                .OrderBy(o => o.OrderName)
+                .OrderBy(o => o.OrderName.Value)
                 .Skip((request.PaginationRequest.PageNumebr - 1) * request.PaginationRequest.PageSize)
                 .Take(request.PaginationRequest.PageSize)
                 .ToListAsync(cancellationToken);
