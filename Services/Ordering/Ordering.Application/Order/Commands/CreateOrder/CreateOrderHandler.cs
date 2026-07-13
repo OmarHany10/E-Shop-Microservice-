@@ -14,6 +14,7 @@ namespace Ordering.Application.Order.Commands.CreateOrder
             var billingAdd = Address.Of(request.OrderDTO.BillingAddress.FirstName, request.OrderDTO.BillingAddress.LastName, request.OrderDTO.BillingAddress.EmailAddress, request.OrderDTO.BillingAddress.AddressLine, request.OrderDTO.BillingAddress.Country, request.OrderDTO.BillingAddress.State, request.OrderDTO.BillingAddress.ZipCode);
 
             var order = Domain.Models.Order.Create(
+                orderId: request.OrderDTO.OrderId,
                 customerId: CustomerId.Of(request.OrderDTO.CustomerId),
                 orderName: OrderName.Of(request.OrderDTO.OrderName),
                 shippingAddress: shippingAdd,

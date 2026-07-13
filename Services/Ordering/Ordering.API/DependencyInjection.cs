@@ -2,6 +2,7 @@
 using Carter;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.FeatureManagement;
 
 namespace Ordering.API
 {

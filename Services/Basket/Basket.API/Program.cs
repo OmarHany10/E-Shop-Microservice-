@@ -1,6 +1,7 @@
 using Basket.API.Data;
 using BuildingBlocks.Behaviors;
 using BuildingBlocks.Exceptions;
+using BuildingBlocks.Messaging;
 using Carter;
 using Discount.gRPC;
 using HealthChecks.UI.Client;
@@ -56,6 +57,9 @@ namespace Basket.API
 
                 return handler;
             });
+
+            builder.Services.AddMessageBroker(builder.Configuration);
+            
 
             var app = builder.Build();
 
