@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/ApiGetways/">
+    <Project Path="ApiGetways/ApiGetway/ApiGetway.csproj" Id="34ea259e-ccac-409b-ad1a-92cdca6c43e5" />
+  </Folder>
   <Folder Name="/BuildingBlocks/">
     <Project Path="BuildingBlocks.Messaging/BuildingBlocks.Messaging.csproj" />
     <Project Path="BuildingBlocks/BuildingBlocks.csproj" />

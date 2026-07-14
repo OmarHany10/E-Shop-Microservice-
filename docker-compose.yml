@@ -40,8 +40,15 @@ services:
       context: .
       dockerfile: Services/Ordering/Ordering.API/Dockerfile
 
+  apigetway:
+    image: ${DOCKER_REGISTRY-}apigetway
+    build:
+      context: .
+      dockerfile: ApiGetways/ApiGetway/Dockerfile
+
 volumes:
   postgres_catalog:
   postgres_basket:
+
 
 
