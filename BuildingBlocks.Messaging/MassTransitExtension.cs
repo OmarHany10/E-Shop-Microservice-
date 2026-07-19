@@ -15,8 +15,8 @@ namespace BuildingBlocks.Messaging
             {
                 config.SetKebabCaseEndpointNameFormatter();
 
-                //if (assembly != null)
-                //    config.AddConsumers(assembly);
+                if (assembly != null)
+                    config.AddConsumers(assembly);
 
                 config.UsingRabbitMq((context, configurator) =>
                 {

@@ -46,9 +46,16 @@ services:
       context: .
       dockerfile: ApiGetways/ApiGetway/Dockerfile
 
+  e-shop.web:
+    image: ${DOCKER_REGISTRY-}eshopweb
+    build:
+      context: .
+      dockerfile: WebApps/E-Shop.Web/Dockerfile
+
 volumes:
   postgres_catalog:
   postgres_basket:
+
 
 
 
