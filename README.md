@@ -198,8 +198,3 @@ Each microservice includes ASP.NET Core Health Checks monitoring database connec
 - **Basket Health Check**: `/health`
 - **Ordering Health Check**: `/health`
 
----
-
-## 📝 License
-
-This project is open-source and available under the [MIT License](LICENSE).
